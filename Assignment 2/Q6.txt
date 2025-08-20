@@ -1,0 +1,169 @@
+// OPERATION ON SPARSE MATRIX USING TRIPLET
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    int a;
+    cout<<"a:";
+    cin>>a;
+    switch(a){      
+        case 1:{                                                // TRANSPOSE
+            int n;
+            cout<<"non_zero_value:";
+            cin>>n;
+            int A[3][n];
+            int B[n][3];
+            for(int j=0;j<n;j++){
+                cout<<"Enter row:";
+                cin>>A[0][j];
+                cout<<"Enter col:";
+                cin>>A[1][j];
+                cout<<"Enter value:";
+                cin>>A[2][j];
+            }
+            for(int i=0;i<3;i++){
+                for(int j=0;j<n;j++){
+                    B[j][i]=A[i][j];
+                }
+            }
+            cout<<"Transpose of Matrix A:"<<endl;
+            for(int i=0;i<n;i++){
+                for(int j=0;j<3;j++){
+                    cout<<B[i][j]<<" ";
+                }
+                cout<<endl;
+            }
+            break;
+        }
+        case 2:{                                               // ADDITION
+            int n1,n2;
+            cout<<"n1:";
+            cin>>n1;
+            cout<<"n2:";
+            cin>>n2;
+            int arr[3][n1];
+            int brr[3][n2];
+            int crr[3][40];
+            int k=0;
+            cout<<"INPUT OF ARRAY arr"<<endl;
+            for(int j=0;j<n1;j++){
+                cout<<"Enter row:";
+                cin>>arr[0][j];
+                cout<<"Enter col:";
+                cin>>arr[1][j];
+                cout<<"Enter value:";
+                cin>>arr[2][j];
+            }
+            cout<<"INPUT OF ARRAY brr"<<endl;
+            for(int j=0;j<n2;j++){
+                cout<<"Enter row:";
+                cin>>brr[0][j];
+                cout<<"Enter col:";
+                cin>>brr[1][j];
+                cout<<"Enter value:";
+                cin>>brr[2][j];
+            }
+            for (int i = 0; i < n1; i++) {
+                int count=0;
+                for (int j = 0; j < n2; j++) {
+                    if (arr[0][i] == brr[0][j] && arr[1][i] == brr[1][j]) {
+                        crr[0][k] = arr[0][i];
+                        crr[1][k] = arr[1][i];
+                        crr[2][k] = arr[2][i] + brr[2][j];
+                        count++;
+                        k++;
+                        break;
+                    }
+                }
+                if (count==0) {
+                    crr[0][k] = arr[0][i];
+                    crr[1][k] = arr[1][i];
+                    crr[2][k] = arr[2][i];
+                    k++;
+                }
+            }
+            for (int j = 0; j < n2; j++) {
+                int count = 0;
+                for (int i = 0; i < n1; i++) {
+                    if (brr[0][j] == arr[0][i] && brr[1][j] == arr[1][i]) {
+                        count = 1;
+                        break;
+                    }
+                }
+                if (count == 0) {
+                    crr[0][k] = brr[0][j];
+                    crr[1][k] = brr[1][j];
+                    crr[2][k] = brr[2][j];
+                    k++;
+                }
+            }
+            cout<<"crr:"<<endl;
+            for(int i=0;i<3;i++){
+                for(int j=0;j<k;j++){
+                    cout<<crr[i][j]<<" ";
+                }
+                cout<<endl;
+            }
+            break;
+        }
+        case 3:{                                                           // MULTIPLY
+            int r1, c1, m;
+            cout << "Enter rows, cols and non-zero elements of first matrix: ";
+            cin>>r1>>c1>>m;
+            int C[3][m];   
+            cout << "Enter row col value for C:"<<endl;
+            for (int i = 0; i < m; i++) {
+                cin>>C[0][m]>>C[1][m]>>C[2][m];
+            }
+            int r2, c2, t;
+            cout << "Enter rows, cols and non-zero elements of second matrix: ";
+            cin >> r2 >> c2 >> t;
+            int D[3][t];   
+            cout << "Enter row col value for D:"<<endl;
+            for (int i = 0; i < t; i++) {
+                cin >> D[0][t] >> D[1][t] >> D[2][t];
+            }
+            if (c1 != r2) {
+                cout << "Matrix multiplication not possible!";
+                return 0;
+            }
+            int E[50][50];
+            for (int i = 0; i < r1; i++) {
+                for (int j = 0; j < c2; j++) {
+                    E[i][j] = 0;
+                }
+            }
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < t; j++) {
+                    if (C[1][i] == D[0][j]) {  
+                        E[C[0][i]][D[1][j]] += C[i][2] * D[j][2];
+                    }
+                }
+            }
+            int Res[100][3];
+            int nz = 0;
+            for (int i = 0; i < r1; i++) {
+                for (int j = 0; j < c2; j++) {
+                    if (E[i][j] != 0) {
+                        Res[0][nz] = i;
+                        Res[1][nz] = j;
+                        Res[2][nz] = E[i][j];
+                        nz++;
+                    }
+                }
+            }
+            cout <<"\nResultant matrix in triplet form:\n";
+            cout <<"Row Col Val\n";
+            for(int i = 0;i < nz; i++){
+                cout<<Res[0][i]<<" "<<Res[1][i]<<" "<<Res[2][i]<<"\n";
+            }
+            break;
+        }
+        default:{
+            cout<<"Invalid option";
+        }
+    }
+
+    return 0;
+}

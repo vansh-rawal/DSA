@@ -1,0 +1,153 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int a;
+    cout<<"a:";
+    cin>>a;
+    switch(a){
+        case 1:{                                      // DIAGONAL MATRIX
+            int size;
+            cout<<"size:";
+            cin>>size;
+            int diag[size];
+            for(int i=0;i<size;i++){
+                cin>>diag[i];
+            }
+            for(int i=0;i<size;i++){
+                for(int j=0;j<size;j++){
+                    if(i==j){
+                        cout<<diag[i]<<" ";
+                    }
+                    else{
+                        cout<<0<<" ";
+                    }
+                }
+                cout<<endl;
+            }
+            break;
+        }
+        case 2:{                                            // TRI-DIAGONAL MATRIX
+            int m;
+            cout << "Enter size of square matrix: ";
+            cin >> m;
+            int lower[100], main[100], upper[100];
+            cout << "Enter "<<m-1<<" elements of Lower diagonal: ";
+            for (int i=0;i<m-1;i++){
+                cin>>lower[i];
+            }
+            cout << "Enter "<<m<<" elements of Main diagonal: ";
+            for (int i=0;i<m;i++){
+                cin>>main[i];
+            }
+            cout << "Enter "<<m-1<<" elements of Upper diagonal: ";
+            for (int i=0;i<m-1;i++){
+                cin >> upper[i];
+            }
+            cout << "The Tri-diagonal Matrix is:";
+            for (int i=0;i<m;i++) {
+                for (int j=0;j<m;j++) {
+                    if (i==j)               
+                        cout<<main[i]<<" ";
+                    else if (i==j+1)      
+                        cout<<lower[j]<<" ";
+                    else if (i+1==j)      
+                        cout<<upper[i]<<" ";
+                    else
+                        cout <<"0 ";
+                }
+                cout << endl;
+            }
+            
+        
+            break;
+        }
+        case 3:{                          // LOWER TRIANGLE MATRIX
+            int n;
+            cout<<"size(n):";
+            cin>>n;
+            int lower[100];
+            int k=0;
+            for(int i=0;i<n;i++){
+                for(int j=0;j<=i;j++){
+                    cout<<"lower["<<i<<","<<j<<"]:";
+                    cin>>lower[k];
+                    k++;
+                }
+            }
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    if(i>=j){
+                        cout<<lower[i*(i+1)/2+j]<<" ";
+                    }
+                    else{
+                        cout<<0<<" ";
+                    }
+                }
+                cout<<endl;
+            }
+            break;
+        }
+        case 4:{                                  // UPPER TRIANGLE MATRIX
+            int n1;
+            cout<<"size(n):";
+            cin>>n1;
+            int A[100];
+            int k=0;
+            for(int j=0;j<n1;j++){
+                for(int i=0;i<=j;i++){
+                    cout<<"A["<<i<<","<<j<<"]:";
+                    cin>>A[k];
+                    k++;
+                }
+            }
+            for(int j=0;j<n1;j++){
+                for(int i=0;i<n1;i++){
+                    if(j>=i){
+                        cout<<A[j*(j+1)/2+i]<<" ";
+                    }
+                    else{
+                        cout<<0<<" ";
+                    }
+                }
+                cout<<endl;
+            }
+            break;
+        }
+        case 5:{                          // SYMMETRIC MATRIX
+            int n2;
+            cout<<"n2:";
+            cin>>n2;
+            int sym[10];   
+            int k = 0;
+            for(int i=0; i<n2; i++){
+                for(int j=0; j<=i; j++){
+                    cout << "Enter sym["<<i <<","<<j<<"]:";
+                    cin >> sym[k];
+                    k++;
+                }
+            }
+            for(int i=0;i<n2;i++){
+                for(int j=0;j<n2;j++){
+                    int p,q;
+                    if(i>=j) {
+                        p=i;
+                        q=j;
+                    }
+                    else {
+                        p=j;
+                        q=i;
+                    }
+                    int indx=p*(p+1)/2+q;
+                    cout<<sym[indx]<<" ";
+                }
+                cout<<endl;
+            }
+            break;
+        }
+        default:{
+            cout<<"Invalid option";
+        }
+    }
+    return 0;
+} 

@@ -1,0 +1,28 @@
+//COUNTING NUMBER OF INVERSIONS IN AN ARRAY
+
+
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n;                                  
+    cout<<"n:";
+    cin>>n;
+    int A[n];
+    int count=0;
+    for(int i=0;i<n;i++){
+        cin>>A[i];
+    }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(A[i]>A[j] && i<j){
+                count++;
+            }
+            
+        }
+    }
+    cout<<"Number of inversion:"<<count;
+    
+
+    return 0;
+}

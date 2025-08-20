@@ -1,0 +1,22 @@
+// FINDING MISSING NUMBER
+
+
+#include <iostream>
+using namespace std;
+int main()
+{   
+    int diff;
+    int num;
+    int arr[5]={1,2,4,5,6};                                      
+    for(int i=0;i<3;i++){
+        if(arr[i+1]-arr[i]!=arr[i+2]-arr[i+1]){
+            diff=arr[i+1]-arr[i];
+            num=arr[i+1];
+            break;
+        }
+    }
+    int missing_num=diff+num;
+    cout<<"Missing number:"<<missing_num;
+
+    return 0;
+}

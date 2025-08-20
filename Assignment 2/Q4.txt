@@ -1,0 +1,96 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+int main()
+{
+    int a;
+    cout<<"a:";
+    cin>>a;
+    switch(a){
+        case 1:{                                                //CONCATENATING OF 2 STRINGS
+            char str1[20];
+            cout<<"str1:";
+            cin>>str1;
+            char str2[20];
+            cout<<"str2:";
+            cin>>str2;
+            char str3[40];
+            strcpy(str3,strcat(str1,str2));
+            for(int i=0;i<strlen(str3);i++){
+                cout<<str3[i];
+            }
+            break;
+        }
+        case 2:{                                           // REVERSING A STRING
+            char str4[20];
+            cout<<"str4:";
+            cin>>str4;
+            int n=strlen(str4);
+            for(int i=0;i<n/2;i++){
+                char temp;
+                temp=str4[i];
+                str4[i]=str4[n-1-i];
+                str4[n-1-i]=temp;
+            }
+            for(int i=0;i<n;i++){
+                cout<<str4[i];
+            }
+            break;
+        }
+        case 3:{                                                        //REMOVING VOWELS FROM STRING
+            char str5[20];
+            cout<<"str5:";
+            cin>>str5;
+            int len=strlen(str5);
+            for(int i=0;i<len;i++){
+                if(str5[i]=='a'||str5[i]=='e'||str5[i]=='i'||str5[i]=='o'||str5[i]=='u'){
+                    for(int j=i;j<len;j++){
+                        str5[j]=str5[j+1];
+                        }
+                    }
+            }
+            for(int i=0;i<len-1;i++){
+                cout<<str5[i];
+            }
+            break;
+        }
+        case 4:{                                                       //SORTING A STRING ALPHABETICALLY
+            char str6[20];
+            cout<<"str6:";
+            cin>>str6;
+            int len1=strlen(str6);
+            for(int i=0;i<len1-1;i++){
+                for(int j=0;j<len1-1-i;j++){
+                    if(str6[j]>str6[j+1]){
+                        char temp;
+                        temp=str6[j];
+                        str6[j]=str6[j+1];
+                        str6[j+1]=temp;
+                    }
+                }
+            }
+            for(int i=0;i<len1;i++){
+                cout<<str6[i];
+            }
+            break;
+        }
+        case 5:{                                                       //CHANGING CHARACTER FROM UPPER CASE TO LOWER CASE
+            char ch;
+            cout<<"ch:";
+            cin>>ch;
+            if(ch>='A' && ch<='Z'){
+                ch=ch+32;
+                cout<<"Lower case character: "<<ch<<endl;
+            }
+            else{
+                cout<<"The character is not uppercase";
+            }
+            break;
+        }
+        default:{
+            cout<<"Invalid option";
+        }
+    }
+
+    return 0;
+}
