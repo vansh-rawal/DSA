@@ -1,0 +1,48 @@
+// Q2 REVERSING A STRING
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+#define size 10
+char stack[size];
+int top = -1;
+
+void push(char c){
+    if(top==size-1){
+        cout<<"Overflow"<<endl;
+    } 
+    else{
+        top++;
+        stack[top]=c;
+    }
+}
+
+char pop(){
+    if(top==-1){
+        cout<<"Underflow"<<endl;
+        return '\0';
+    } 
+    else{
+        char c=stack[top];
+        top--;
+        return c;
+    }
+}
+
+int main(){
+    char str[size];
+    cout<<"Enter a string:";
+    cin>>str;
+
+    int n=strlen(str);
+    for(int i=0;i<n;i++) {
+        push(str[i]);
+    }
+
+    cout << "Reversed string:";
+    for (int i=0;i<n;i++) {
+        cout<<pop();
+    }
+    return 0;
+}

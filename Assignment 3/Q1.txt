@@ -1,0 +1,113 @@
+// Q1 OPERATION ON STACK
+
+#include <iostream>
+using namespace std;
+
+#define size 10
+int stack[size];
+int top=-1;
+
+void push(int x){
+    if(top==size-1){
+        cout<<"Overflow"<<endl;
+    } 
+    else{
+        top++;
+        stack[top]=x;
+        cout<<"Pushed element:"<<x<<endl;
+    }
+}
+
+void pop(){
+    if(top==-1){
+        cout<<"Underflow"<<endl;
+    } 
+    else{
+        cout<<"Popped element:"<<stack[top]<< endl;
+        top--;
+    }
+}
+
+void peek(){
+    if(top==-1){
+        cout<<"Stack is empty"<<endl;
+    } 
+    else{
+        cout<<"Top element:"<< stack[top]<<endl;
+    }
+}
+
+void display(){
+    if(top==-1){
+        cout<<"Stack is empty"<<endl;
+    } 
+    else{
+        cout<<"Stack elements:";
+        for (int i=top;i>=0;i--) {
+            cout << stack[i] << " ";
+        }
+    }
+}
+
+void isEmpty(){
+    if(top==-1){
+        cout<<"Stack is empty"<<endl;    
+    }
+    else{
+        cout << "Stack is not empty"<<endl;    
+    }
+}    
+
+void isFull() {
+    if(top==size-1){
+        cout<<"Stack is full"<<endl;
+    }
+    else{
+        cout<<"Stack is not full"<<endl;
+    }
+}
+
+int main() {
+    int ch, x;
+    do {
+        cout << "Enter choice: ";
+        cin >> ch;
+
+        switch (ch) {
+            case 1:{
+                cout << "Enter value: ";
+                cin >> x;
+                push(x);
+                break;
+            }
+            case 2:{
+                pop();
+                break;
+            }
+            case 3:{
+                peek();
+                break;
+            }
+            case 4:{
+                display();
+                break;
+            }
+            case 5:{
+                isEmpty();
+                break;
+            }
+            case 6:{
+                isFull();
+                break;
+            }
+            case 7:{
+                cout << "Exiting Program"<<endl;
+                break;
+            }
+            default:
+                cout << "Invalid Choice"<<endl;
+        }
+    } while (ch != 7);
+
+    return 0;
+}

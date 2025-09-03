@@ -1,0 +1,74 @@
+//Q5 Evaluation of POSTFIX 
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+#define size 10
+int stack[size];
+int top = -1;
+
+void push(int x) {
+    if(top==size-1){
+        cout<<"Overflow"<<endl;    
+    }
+    else{
+        top++;
+        stack[top]=x;
+    }
+}
+
+int pop(){
+    if(top==-1){
+        cout<<"Underflow"<<endl;
+        return 0;
+    } 
+    else{
+        int s=stack[top];
+        top--;
+        return s;
+    }
+}
+
+bool isOperator(char c){
+    return (c=='+' || c=='-' || c=='*' || c=='/' || c=='^');
+}
+
+int calculate(int a,int b,char op){
+    switch(op) {
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
+        case '/': return a / b;  
+        case '^': {              
+            int result=1;
+            for(int i=0;i<b;i++){
+                result=result*a;
+            }
+            return result;
+        }
+    }
+    return 0;
+}
+
+int main() {
+    char postfix[size];
+    cout << "Enter postfix expression: ";
+    cin >> postfix;
+
+    for(int i = 0; i < strlen(postfix); i++) {
+        char ch = postfix[i];
+        if(ch>='0' && ch<='9'){
+            push(ch-'0');  
+        } 
+        else if(isOperator(ch)) {
+            int b=pop();  
+            int a=pop();  
+            int result=calculate(a, b, ch);
+            push(result);
+        }
+    }
+    cout<<"Result="<<pop()<<endl;
+
+    return 0;
+}
