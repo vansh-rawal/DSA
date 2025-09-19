@@ -1,0 +1,34 @@
+// Find first non-repeating character in a string
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    char str[100];
+    cout << "Enter a string: ";
+    cin >> str;
+
+    char q[100];
+    int f = 0, r = -1;
+    int arr[256] = {0};
+
+    for (int i=0;str[i]!='\0';i++) {
+        char ch=str[i];
+        arr[ch]++;
+
+        if(r<99){
+            r++;
+            q[r]=ch;
+        }
+        while(f<=r && arr[q[f]]>1) {
+            f++;
+        }
+        if(f>r){
+            cout<<"-1 ";
+        }
+        else{
+            cout<<q[f]<<" ";
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,94 @@
+// Stack using 2 Queue
+
+#include <iostream>
+using namespace std;
+#define size 100
+
+int q[size];
+int f = 0, r = -1;
+
+void enqueue(int val){
+    if(r<size-1){
+        r++;
+        q[r]=val;
+        cout<<"Enqueued element:"<<val<<endl;
+    } 
+    else{
+        cout<<"Queue is full"<<endl;
+    }
+}
+
+int dequeue(){
+    if(f>r){
+        cout<<"Queue is empty"<<endl;
+        return -1;
+    } 
+    else{
+        int val=q[f++];
+        cout<<"Dequeued element:"<<val<<endl;
+        return val;
+    }
+}
+
+void push(int val) {
+    cout<<"Pushing element:"<<val<<endl;
+    enqueue(val);
+    for(int i=f;i<r;i++){
+        enqueue(dequeue());
+    }
+}
+
+void pop(){
+    if(f>r){
+        cout<<"stack is empty"<<endl;
+    } 
+    else{
+        cout<<"Popped element:"<<dequeue()<<endl;
+    }
+}
+
+void display(){
+    if(f>r){
+        cout<<"stack is empty"<<endl;
+    } 
+    else{
+        cout<<"stack:";
+        for (int i=f;i<=r;i++) {
+            cout<<q[i]<<" ";
+        }
+        cout<<endl;
+    }
+}
+
+int main() {
+    int choice, val;
+    do{ 
+        cout << "--- Stack using Two Queues ---"<<endl;
+        cout << "1. Push\n2. Pop\n3. Display\n4. Exit\n";
+        cout<<"Enter choice:";
+        cin>>choice;
+        switch(choice){
+            case 1:{
+                cout<<"Enter value to be pushed:";
+                cin>>val;
+                push(val);
+                break;
+            }
+            case 2:{
+                pop();
+                break;
+            }
+            case 3:{
+                display();
+                break;
+            }
+            case 4:{
+                cout<<"Exiting Program"<<endl;
+            }
+            default:{
+                cout<<"Invalid Option"<<endl;
+            }
+        }
+    }while(choice!=4);
+    return 0;
+}
