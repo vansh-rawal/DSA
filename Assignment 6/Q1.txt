@@ -1,0 +1,173 @@
+//MENU Program for Doubly Linked List
+
+#include <iostream>
+using namespace std;
+
+class node{
+public:
+    int data;
+    node* next;
+    node* prev;
+};
+
+class dll{
+    node* head;
+public:
+    dll(){
+        head=NULL;
+    }
+    void insertAtStart(int x);
+    void insertAtEnd(int x);
+    void insertAfter(int pos,int x);
+    void deleteNode(int x);
+    void search(int x);
+    void display();
+};
+
+void dll::insertAtEnd(int x){
+    node* p=new node;
+    p->data=x;
+    p->next=NULL;
+    p->prev=NULL;
+    if(head==NULL){
+        head=p;
+        return;
+    }
+    node* temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=p;
+    p->prev=temp;
+}
+    
+void dll::insertAtStart(int x) {
+    node* p=new node;
+    p->data=x;
+    p->prev=NULL;
+    p->next=head;
+    if(head!=NULL){
+        head->prev=p;
+    }
+    head=p;
+} 
+
+void dll::insertAfter(int pos,int x){ 
+    node* temp=head;
+    while(temp!=NULL && temp->data!=pos){
+        temp=temp->next;
+    }
+    if(temp==NULL){
+        cout << "node not found" << endl;
+        return;
+    }
+    node* newNode=new node;
+    newNode->data=x;
+    newNode->next=temp->next;
+    newNode->prev=temp;
+    if (temp->next!=NULL){
+        temp->next->prev=newNode;
+    }
+    temp->next=newNode;
+} 
+
+void dll::deleteNode(int x){
+    node* temp=head;
+    while(temp!=NULL && temp->data!=x){
+        temp=temp->next;
+    }   
+    if(temp==NULL){
+        cout<<"node not found"<<endl;
+        return;
+    }
+    if (temp->prev!=NULL){
+        temp->prev->next=temp->next;
+    }
+    else{
+        head=temp->next;
+    }
+    if(temp->next!=NULL){
+        temp->next->prev=temp->prev;
+    }
+    delete temp;
+    cout<<"node deleted"<<endl;
+}
+    
+void dll::search(int x){
+    node* temp=head;
+    while(temp!=NULL){
+        if(temp->data==x){
+            cout<<"node found"<<endl;
+            return;
+        }
+        temp=temp->next;
+    }
+    cout<<"node not found"<<endl;
+}  
+    
+void dll::display(){
+    node* temp=head;
+    cout<<"Double Linked List:";
+    while (temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout << endl;
+}    
+
+int main() {
+    dll d;
+    int choice,val,after;
+    do{
+        cout<<"\n1. Insert at Start\n2. Insert at End\n3. Insert After\n4. Delete\n5. Search\n6. Display\n7. Exit\n";
+        cout<<"Enter choice:";
+        cin>>choice;
+        switch(choice){
+            case 1:{
+                cout<<"Enter value:";
+                cin>>val;
+                d.insertAtStart(val);
+                break;
+            }
+            case 2:{
+                cout<<"Enter value:";
+                cin>>val;
+                d.insertAtEnd(val);
+                break;
+            }
+            case 3:{
+                cout<<"Enter node value to insert after:";
+                cin>>after;
+                cout<<"Enter new value:";
+                cin>>val;
+                d.insertAfter(after, val);
+                break;
+            }
+            case 4:{
+                cout<<"Enter value to delete:";
+                cin>>val;
+                d.deleteNode(val);
+                break;
+            }
+            case 5:{
+                cout<<"Enter value to search:";
+                cin>>val;
+                d.search(val);
+                break;
+            }
+            case 6:{
+                d.display();
+                break;
+            }
+            case 7:{
+                cout<<"exit program"<<endl;
+                break;
+            }
+            default:{
+                cout<<"invalid choice"<<endl;
+            }
+        }
+    }while(choice!=7);
+    
+    return 0;
+}

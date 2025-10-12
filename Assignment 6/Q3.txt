@@ -1,0 +1,146 @@
+//Size of Doubly Linked List and Circular Linked List
+
+#include <iostream>
+using namespace std;
+
+class node {
+public:
+    int data;
+    node* next;
+    node* prev;
+};
+
+class dll {
+    node* head;
+public:
+    dll() {
+        head = NULL;
+    }
+    void insert(int x);
+    void display();
+    int countNodes();
+};
+
+void dll::insert(int x) {
+    node* p=new node;
+    p->data=x;
+    p->next=NULL;
+    p->prev=NULL;
+    if(head==NULL){
+        head=p;
+        return;
+    }
+    node* temp=head;
+    while(temp->next!=NULL){
+        temp = temp->next;
+    }
+    temp->next=p;
+    p->prev=temp;
+}
+
+void dll::display(){
+    if (head==NULL) {
+        cout<<"Doubly linked list is empty"<<endl;
+        return;
+    }
+    cout<<"Doubly linked list:";
+    node* temp=head;
+    while(temp!=NULL) {
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
+
+int dll::countNodes(){
+    int count=0;
+    node* temp=head;
+    while(temp!= NULL){
+        count++;
+        temp=temp->next;
+    }
+    return count;
+}
+
+class cll{
+    node* head;
+public:
+    cll(){
+        head=NULL;
+    }
+    void insert(int x);
+    void display();
+    int countNodes();
+};
+
+void cll::insert(int x) {
+    node* p=new node;
+    p->data=x;
+    p->next=NULL;
+    if (head==NULL) {
+        head=p;
+        head->next=head;
+        return;
+    }
+    node* temp=head;
+    while(temp->next!=head){
+        temp=temp->next;
+    }
+    temp->next=p;
+    p->next=head;
+}
+
+void cll::display(){
+    if(head==NULL){
+        cout<<"Circular linked list is empty"<<endl;
+        return;
+    }
+    cout<<"Circular linked list:";
+    node* temp=head;
+    do{
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }while(temp!=head);
+    cout<<endl;
+}
+
+int cll::countNodes(){
+    if(head==NULL){
+        return 0;
+    }
+    int count=0;
+    node* temp=head;
+    do{
+        count++;
+        temp=temp->next;
+    }while(temp!=head);
+    return count;
+}
+
+int main() {
+    dll d;
+    cll c;
+    int val;
+    int m;
+    int n;
+    cout<<"No of elements to be entered in Circular linked list:";
+    cin>>m;
+    for(int i=1;i<=m;i++){
+        cout<<"enter value Circular linked list:";
+        cin>>val;
+        c.insert(val);
+    }
+    cout<<"No of elements to be entered in Doubly linked list:";
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cout<<"enter value for Doubly linked list:";
+        cin>>val;
+        d.insert(val);
+    }
+    d.display();
+    c.display();
+    
+    cout<<"size of Doubly linked list:"<<d.countNodes()<<endl;
+    cout<<"size of Circular linked list:"<<c.countNodes()<<endl;
+    return 0;
+}

@@ -1,0 +1,100 @@
+// Checking if a linked list is circular or not
+
+#include <iostream>
+using namespace std;
+
+class node{
+    public:
+    int data;
+    node* next;
+};
+
+class cll{
+    private:
+    node *head;
+    public:
+    cll(){
+        head=NULL;
+    }
+    void insert(int val);
+    void isCircular();
+    void makeCircular();
+    void display();
+};
+
+void cll::insert(int val) {
+    node* newNode=new node;
+    newNode->data=val;
+    newNode->next=NULL;
+    if(head==NULL){
+        head=newNode;
+    }
+    else{
+        node* temp=head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        temp->next=newNode;
+    }
+}
+
+void cll::makeCircular(){
+    if (head == NULL){
+        return;
+    }
+    node* temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=head;
+}
+
+
+void cll::isCircular() {
+    if(head==NULL){
+        cout<<"empty"<<endl;
+        return;
+    }
+    node* p=head;      
+    node* q=head;      
+    while(q!=NULL && q->next!=NULL){
+        p=p->next;         
+        q=q->next->next;   
+        if(p==q){        
+            cout<<"Linked list is a circular linked list"<<endl;
+            return;
+        }
+    }
+    cout<<"Linked list is not a circular linked list"<<endl;    
+}
+
+void cll::display(){
+    if(head==NULL){
+        cout<<"empty"<<endl;
+        return;
+    }
+    node* temp=head;
+    do{
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }while(temp!=head);
+    
+    cout<<endl;
+}
+
+int main(){
+    cll c;
+    
+    c.insert(10);
+    c.insert(20);
+    c.insert(30);
+    c.insert(40);
+    c.insert(50);
+    
+    c.isCircular();
+    
+    c.makeCircular();
+    c.display();
+    c.isCircular();
+    return 0;
+}

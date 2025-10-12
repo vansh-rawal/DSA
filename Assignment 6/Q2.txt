@@ -1,0 +1,68 @@
+//Circular Linked List with repeating value of the head node
+
+#include <iostream>
+using namespace std;
+
+class node{
+public:
+    int data;
+    node* next;
+};
+
+class cll{
+    node* head;
+public:
+    cll(){
+        head=NULL;
+    }
+    void insert(int x);
+    void display();
+};
+
+void cll::insert(int x){
+    node* p=new node;
+    p->data=x;
+    p->next=NULL;
+    if(head == NULL){
+        head=p;
+        head->next=head;
+        return;
+    }
+    node* temp=head;
+    while(temp->next!=head){
+        temp=temp->next;
+    }
+    temp->next = p;
+    p->next = head;
+}
+
+void cll::display(){
+    if(head==NULL){
+        cout<<"linked list is empty"<<endl;
+        return;
+    }
+    node* temp=head;
+    cout<<"Circular Linked List with repeating value of the head node:";
+    do{
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }while(temp!=head);
+    cout<<head->data<<endl;
+}
+
+int main(){
+    cll c;
+    int n;
+    int val;
+    cout<<"No of elements to be added in Circular linked list:";
+    cin>>n;
+    for(int i=1;i<=n;i++){
+        cout<<"enter value:";
+        cin>>val;
+        c.insert(val);
+    }
+    
+    c.display();
+
+    return 0;
+}
