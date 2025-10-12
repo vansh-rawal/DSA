@@ -83,14 +83,15 @@ void dll::display(){
 int main(){
     dll d;
     
-    d.insert('L');
-    d.insert('E');
-    d.insert('V');
-    d.insert('E');
-    d.insert('L');
+    d.insert('M');
+    d.insert('A');
+    d.insert('D');
+    d.insert('A');
+    d.insert('M');
     
     d.display();
     
     d.isPalindrome();
     return 0;
 }
+
